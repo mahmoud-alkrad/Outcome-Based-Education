@@ -1,0 +1,79 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = OBE
+build_property.RootNamespace = OBE
+build_property.ProjectDir = C:\Users\User\Downloads\Outcome-Based-Education-OBE-system-main\Outcome-Based-Education-OBE-system-main\OBE\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\User\Downloads\Outcome-Based-Education-OBE-system-main\Outcome-Based-Education-OBE-system-main\OBE
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/CollegeGoal/GetAllCollage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGVnZUdvYWxcR2V0QWxsQ29sbGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/CourseGoal/GetCourseGoals.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlR29hbFxHZXRDb3Vyc2VHb2Fscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Course/GetAllCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXEdldEFsbENvdXJzZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/ProgramGoal/GetProgramGoals.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbUdvYWxcR2V0UHJvZ3JhbUdvYWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Program/GetProgram.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxHZXRQcm9ncmFtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Shared/_LoginLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/User/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/User/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Downloads/Outcome-Based-Education-OBE-system-main/Outcome-Based-Education-OBE-system-main/OBE/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ujtsvpfeka

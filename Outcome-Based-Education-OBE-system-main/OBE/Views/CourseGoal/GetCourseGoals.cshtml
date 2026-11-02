@@ -1,0 +1,754 @@
+﻿@model IEnumerable<OBE.Models.CourseGoal>
+
+@{
+    ViewData["Title"] = "CourseGoal";
+    ViewData["Description"] = "Manage coursesGoal across different programs";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Learning Outcomes (CLOs)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            padding: 32px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .header-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .header-content p {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        .btn-add {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+
+            .btn-add:hover {
+                background: #1d4ed8;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+            }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .filter-select {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1e293b;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 48px;
+        }
+
+            .filter-select:focus {
+                outline: none;
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            }
+
+        /* Table Section */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 20px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+
+            tbody tr:hover {
+                background-color: #f8fafc;
+            }
+
+            tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+        .clo-id {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .clo-code {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .clo-description {
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Bloom's Level Badge */
+        .bloom-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .bloom-understanding {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .bloom-applying {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .bloom-analyzing {
+            background: #e9d5ff;
+            color: #6b21a8;
+        }
+
+        .bloom-evaluating {
+            background: #fed7aa;
+            color: #9a3412;
+        }
+
+        .bloom-creating {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 16px;
+        }
+
+        .btn-edit {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+            .btn-edit:hover {
+                background: #e2e8f0;
+                color: #1e293b;
+            }
+
+        .btn-delete {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+            .btn-delete:hover {
+                background: #fee2e2;
+                color: #991b1b;
+            }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+            .modal.active {
+                display: flex;
+            }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @@keyframes slideUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .modal-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #1e293b;
+            }
+
+        .btn-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f1f5f9;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+
+            .btn-close:hover {
+                background: #e2e8f0;
+                color: #1e293b;
+            }
+
+        .modal-body {
+            padding: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: #1e293b;
+            }
+
+                .form-group label .required {
+                    color: #dc2626;
+                    margin-left: 4px;
+                }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+                padding: 12px 16px;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                font-size: 0.95rem;
+                font-family: inherit;
+                transition: all 0.2s;
+            }
+
+                .form-group input:focus,
+                .form-group textarea:focus,
+                .form-group select:focus {
+                    outline: none;
+                    border-color: #2563eb;
+                    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+                }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+
+            .form-group small {
+                display: block;
+                margin-top: 6px;
+                color: #64748b;
+                font-size: 0.85rem;
+            }
+
+        .modal-footer {
+            padding: 20px 32px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-secondary {
+            padding: 10px 20px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .btn-secondary:hover {
+                background: #f8fafc;
+                border-color: #cbd5e1;
+            }
+
+        .btn-primary {
+            padding: 10px 20px;
+            border: none;
+            background: #2563eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .btn-primary:hover {
+                background: #1d4ed8;
+            }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #64748b;
+        }
+
+        /* RTL Support */
+        textarea[dir="rtl"]::placeholder {
+            text-align: right;
+        }
+
+        @@media (max-width: 768px) {
+            body
+
+        {
+            padding: 16px;
+        }
+
+        .page-header {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .btn-add {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            min-width: 800px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1>Course Learning Outcomes (CLOs)</h1>
+                <p>Manage learning outcomes for each course</p>
+            </div>
+            <button class="btn-add" onclick="openModal('add')">
+                <span>+</span>
+                <span>Add New CLO</span>
+            </button>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <label class="filter-label">Select Course</label>
+            <select class="filter-select" id="courseFilter" onchange="filterByCourse()">
+                @if (ViewBag.Course != null)
+                {
+                    foreach (var prog in ViewBag.Course)
+                    {
+                        <option value="@prog.Id">@prog.NameEn</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <!-- CLOs Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>CLO ID</th>
+                        <th>Code</th>
+                        <th>Course</th>
+                        <th>Description (English)</th>
+                        <th>Description (Arabic)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="closTableBody">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit CLO -->
+    <div class="modal" id="cloModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New CLO</h2>
+                <button class="btn-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="cloForm">
+                    <div class="form-group">
+                        <label>Course <span class="required">*</span></label>
+                        <select id="courseId" required>
+                            @if (ViewBag.Course != null)
+                            {
+                                foreach (var prog in ViewBag.Course)
+                                {
+                                    <option value="@prog.Id">@prog.NameEn</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CLO Code <span class="required">*</span></label>
+                        <input type="text" id="Code" placeholder="e.g., CLO1" required maxlength="50">
+                        <small>Maximum 50 characters</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (English) <span class="required">*</span></label>
+                        <textarea id="DescriptionEn" placeholder="Describe the learning outcome in English" required></textarea>
+                        <small>Provide a clear and detailed description</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Arabic) <span class="required">*</span></label>
+                        <textarea id="DescriptionAr" placeholder="صف مخرج التعلم بالعربية" required dir="rtl"></textarea>
+                        <small>قدم وصفاً واضحاً ومفصلاً</small>
+                    </div>
+
+                    <input type="hidden" id="cloId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveCLO()">Save CLO</button>
+            </div>
+        </div>
+    </div>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    // ==========================================
+    // 1. استقبال البيانات من الداتا بيس عند تحميل الصفحة
+    // ==========================================
+    // بدلاً من let clos = []، نأخذ البيانات الحقيقية
+     var allPrograms = @Html.Raw(Json.Serialize(ViewBag.Course != null 
+            ? ((IEnumerable<dynamic>)ViewBag.Course).Select(p => new { id = p.Id, name = p.NameEn}) 
+            : new List<object>()));
+    var clos = @Html.Raw(Json.Serialize(Model.Select(x => new {
+        id = x.Id,
+        courseId = x.CourseId,
+        code = x.Code,
+        descriptionEn = x.DescriptionEn, 
+        descriptionAr = x.DescriptionAr
+    })));
+
+    // تعريف المتغيرات
+    var filteredCLOs = [...clos];
+    var currentEditIndex = -1;
+    var modalMode = 'add';
+
+    // تشغيل الجدول عند الفتح
+    $(document).ready(function() {
+        renderTable();
+    });
+
+    // ==========================================
+    // 2. دوال العرض والفلترة
+    // ==========================================
+    function filterByCourse() {
+        const selectedCourse = document.getElementById('courseFilter').value;
+        if (!selectedCourse) {
+            filteredCLOs = [...clos];
+        } else {
+            // تحويل القيمة لرقم للمقارنة
+            filteredCLOs = clos.filter(clo => clo.courseId == selectedCourse);
+        }
+        renderTable();
+    }
+
+    function renderTable() {
+        const tbody = document.getElementById('closTableBody');
+        tbody.innerHTML = '';
+
+        if (filteredCLOs.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px;">No CLOs Found</td></tr>`;
+            return;
+        }
+
+        filteredCLOs.forEach((clo, index) => {
+            const progObj = allPrograms.find(p => p.id === clo.courseId);
+                const courseName = progObj ? progObj.name : 'Unknown Program';
+            const row = `
+                <tr>
+                    <td>${clo.id}</td>
+                    <td><span class="clo-code">${clo.code}</span></td>
+                    <td><span class="clo-code">${courseName}</span></td>
+                    <td>${clo.descriptionEn}</td>
+                    <td dir="rtl">${clo.descriptionAr}</td>
+                    
+                    <td>
+                        <div class="actions">
+                            <button class="btn-icon btn-edit" onclick="openModal('edit', ${index})">✏️</button>
+                            <button class="btn-icon btn-delete" onclick="deleteCLO(${clo.id})">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    }
+
+    // ==========================================
+    // 3. دوال المودال
+    // ==========================================
+    function openModal(mode, index = -1) {
+        modalMode = mode;
+        const modal = document.getElementById('cloModal');
+        const title = document.getElementById('modalTitle');
+
+        if (mode === 'add') {
+            title.textContent = 'Add New CLO';
+            document.getElementById('cloForm').reset();
+            document.getElementById('cloId').value = '0'; // صفر تعني إضافة جديد
+            
+            // تحديد الكورس تلقائياً إذا كان مفلتراً
+            const filterVal = document.getElementById('courseFilter').value;
+            if(filterVal) document.getElementById('courseId').value = filterVal;
+
+        } else {
+            title.textContent = 'Edit CLO';
+            const clo = filteredCLOs[index];
+            
+            document.getElementById('cloId').value = clo.id;
+            document.getElementById('courseId').value = clo.courseId;
+            document.getElementById('Code').value = clo.code;
+            document.getElementById('DescriptionEn').value = clo.descriptionEn;
+            document.getElementById('DescriptionAr').value = clo.descriptionAr;
+        }
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('cloModal').classList.remove('active');
+    }
+
+    // ==========================================
+    // 4. الحفظ في الداتا بيس (AJAX Fetch)
+    // ==========================================
+    async function saveCLO() {
+        // جلب القيم
+        const id = document.getElementById('cloId').value;
+        const courseId = document.getElementById('courseId').value;
+        const code = document.getElementById('Code').value;
+        const DescriptionEn = document.getElementById('DescriptionEn').value;
+        const DescriptionAr = document.getElementById('DescriptionAr').value;
+
+        // التحقق
+        if (!courseId || !code || !DescriptionAr || !DescriptionEn) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        // تجهيز البيانات
+        const formData = new FormData();
+        formData.append('Id', id);
+        formData.append('CourseId', courseId);
+        formData.append('Code', code);
+        formData.append('DescriptionEn', DescriptionEn); // لاحظ: يجب أن تطابق اسم البروبرتي في C# Model
+        formData.append('DescriptionAr', DescriptionAr);
+        const url = modalMode === 'add' ? '/CourseGoal/CreateCourseGoal' : '/CourseGoal/UpdateCourseGoal';
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                alert('Saved Successfully!');
+                location.reload(); // تحديث الصفحة لرؤية البيانات من الداتا بيس
+            } else {
+                const text = await response.text();
+                alert('Error: ' + text);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Connection Failed');
+        }
+    }
+
+    // ==========================================
+    // 5. الحذف من الداتا بيس
+    // ==========================================
+    async function deleteCLO(id) {
+        if (!confirm('Are you sure?')) return;
+
+        const formData = new FormData();
+        formData.append('id', id);
+
+        try {
+            const response = await fetch('/CourseGoal/DeleteCourseGoal', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                alert('Deleted Successfully!');
+                location.reload();
+            } else {
+                alert('Error deleting item');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Connection Failed');
+        }
+    }
+</script>
+</body>
+</html>

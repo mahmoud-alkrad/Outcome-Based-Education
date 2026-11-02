@@ -1,0 +1,510 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --background: #f8f7f4;
+            --surface: #ffffff;
+            --text-primary: #16213e;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --input-focus: #0f3460;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+            body::before {
+                content: '';
+                position: fixed;
+                top: -50%;
+                right: -30%;
+                width: 80%;
+                height: 100%;
+                background: radial-gradient(circle, rgba(233, 69, 96, 0.08) 0%, transparent 70%);
+                pointer-events: none;
+                /* تم التصحيح: @@ */
+                animation: float 20s ease-in-out infinite;
+            }
+
+        /* تم التصحيح: @@ */
+        @@keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-20px, 20px) rotate(5deg);
+            }
+        }
+
+        .container {
+            max-width: 680px;
+            width: 100%;
+            background: var(--surface);
+            border-radius: 2px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+            position: relative;
+        }
+
+        /* تم التصحيح: @@ */
+        @@keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f3460 100%);
+            padding: 3.5rem 3rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .header::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 300px;
+                height: 300px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+                animation: pulse 4s ease-in-out infinite;
+            }
+
+        /* تم التصحيح: @@ */
+        @@keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-wrapper {
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+            animation: fadeIn 0.5s ease-out backwards;
+        }
+
+            .form-group:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+
+            .form-group:nth-child(2) {
+                animation-delay: 0.15s;
+            }
+
+            .form-group:nth-child(3) {
+                animation-delay: 0.2s;
+            }
+
+            .form-group:nth-child(4) {
+                animation-delay: 0.25s;
+            }
+
+            .form-group:nth-child(5) {
+                animation-delay: 0.3s;
+            }
+
+        /* تم التصحيح: @@ */
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+            label .required {
+                color: var(--accent);
+                margin-left: 2px;
+            }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            border: 2px solid var(--border);
+            border-radius: 2px;
+            background: var(--surface);
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+        }
+
+        input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        input:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input:hover:not(:focus) {
+            border-color: #cbd5e1;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .auth-footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+
+            .auth-footer a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s ease;
+            }
+
+                .auth-footer a:hover {
+                    color: var(--accent);
+                    text-decoration: underline;
+                }
+        .helper-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        .submit-wrapper {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            color: white;
+            background: linear-gradient(135deg, var(--accent) 0%, #c41e3a 100%);
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+            button[type="submit"]::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.5s ease;
+            }
+
+            button[type="submit"]:hover::before {
+                left: 100%;
+            }
+
+            button[type="submit"]:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(233, 69, 96, 0.4);
+            }
+
+            button[type="submit"]:active {
+                transform: translateY(0);
+            }
+
+        .validation-error {
+            color: var(--accent);
+            font-size: 0.75rem;
+            margin-top: 0.4rem;
+            display: none;
+        }
+
+        input.error {
+            border-color: var(--accent);
+        }
+
+            input.error + .validation-error {
+                display: block;
+            }
+
+        /* تم التصحيح: @@ */
+        @@media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 2.5rem 1.5rem 2rem;
+            }
+
+                .header h1 {
+                    font-size: 2rem;
+                }
+
+            .form-wrapper {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+
+            button[type="submit"] {
+                padding: 0.875rem 1.5rem;
+            }
+        }
+
+        input[name="name_ar"] {
+            direction: rtl;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registration</h1>
+            <p>Complete the form to register for your program</p>
+        </div>
+
+        <form action="/User/Register" method="POST" class="form-wrapper" id="registrationForm">
+            <div class="form-group">
+                <label for="email">
+                    Email Address <span class="required">*</span>
+                </label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="your.email@example.com"
+                       required
+                       autocomplete="email">
+                <div class="validation-error">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    Password <span class="required">*</span>
+                </label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Enter a secure password"
+                       required
+                       minlength="8"
+                       autocomplete="new-password">
+                <div class="helper-text">Minimum 8 characters</div>
+                <div class="validation-error">Password must be at least 8 characters</div>
+            </div>
+
+            <div class="form-group">
+                <label for="programId">
+                    Program ID <span class="required">*</span>
+                </label>
+                <input type="number"
+                       id="programId"
+                       name="programId"
+                       placeholder="Enter program identifier"
+                       required
+                       min="1">
+                <div class="validation-error">Please enter a valid program ID</div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name_ar">
+                        Name (Arabic) <span class="required">*</span>
+                    </label>
+                    <input type="text"
+                           id="name_ar"
+                           name="name_ar"
+                           placeholder="الاسم بالعربية"
+                           required
+                           dir="rtl">
+                    <div class="validation-error">الرجاء إدخال الاسم بالعربية</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name_en">
+                        Name (English) <span class="required">*</span>
+                    </label>
+                    <input type="text"
+                           id="name_en"
+                           name="name_en"
+                           placeholder="Name in English"
+                           required>
+                    <div class="validation-error">Please enter your name in English</div>
+                </div>
+            </div>
+
+            <div class="submit-wrapper">
+                <button type="submit">Register Now</button>
+            </div>
+        </form>
+        <div class="auth-footer">
+            <p class="mb-0 text-muted">
+                Already have an account?
+                <a href="/User/Login" class="text-primary fw-bold text-decoration-none">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Form validation
+        const form = document.getElementById('registrationForm');
+        const inputs = form.querySelectorAll('input[required]');
+
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                validateInput(input);
+            });
+
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    validateInput(input);
+                }
+            });
+        });
+
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateInput(input)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        function validateInput(input) {
+            const value = input.value.trim();
+            let isValid = true;
+
+            input.classList.remove('error');
+
+            if (!value) {
+                isValid = false;
+            } else if (input.type === 'email' && !isValidEmail(value)) {
+                isValid = false;
+            } else if (input.type === 'password' && value.length < 8) {
+                isValid = false;
+            } else if (input.type === 'number' && (isNaN(value) || parseInt(value) < 1)) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                input.classList.add('error');
+            }
+
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            // تم التصحيح: استخدام @@ داخل ال Regex لتجنب تعارض Razor
+            return /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(email);
+        }
+    </script>
+</body>
+</html>

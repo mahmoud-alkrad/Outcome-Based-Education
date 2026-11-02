@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\OBE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|c:\\users\\user\\source\\repos\\obe\\obe\\controllers\\collegegoalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|solutionrelative:obe\\controllers\\collegegoalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|c:\\users\\user\\source\\repos\\obe\\obe\\views\\programgoal\\getprogramgoals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|solutionrelative:obe\\views\\programgoal\\getprogramgoals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|c:\\users\\user\\source\\repos\\obe\\obe\\views\\program\\getprogram.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|solutionrelative:obe\\views\\program\\getprogram.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|c:\\users\\user\\source\\repos\\obe\\obe\\views\\collegegoal\\getallcollage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|solutionrelative:obe\\views\\collegegoal\\getallcollage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|c:\\users\\user\\source\\repos\\obe\\obe\\views\\coursegoal\\getcoursegoals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|solutionrelative:obe\\views\\coursegoal\\getcoursegoals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|c:\\users\\user\\source\\repos\\obe\\obe\\views\\course\\getallcourse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E8F5DC3-833C-4913-91F4-7842C065C413}|OBE\\OBE.csproj|solutionrelative:obe\\views\\course\\getallcourse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 881,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CollegeGoalController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Controllers\\CollegeGoalController.cs",
+              "RelativeDocumentMoniker": "OBE\\Controllers\\CollegeGoalController.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Controllers\\CollegeGoalController.cs",
+              "RelativeToolTip": "OBE\\Controllers\\CollegeGoalController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAgwDQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-22T18:59:51.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetProgramGoals.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\ProgramGoal\\GetProgramGoals.cshtml",
+              "RelativeDocumentMoniker": "OBE\\Views\\ProgramGoal\\GetProgramGoals.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\ProgramGoal\\GetProgramGoals.cshtml",
+              "RelativeToolTip": "OBE\\Views\\ProgramGoal\\GetProgramGoals.cshtml",
+              "ViewState": "AgIAALoBAAAAAAAAAAAAAAcAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-21T16:14:18.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetProgram.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\Program\\GetProgram.cshtml",
+              "RelativeDocumentMoniker": "OBE\\Views\\Program\\GetProgram.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\Program\\GetProgram.cshtml",
+              "RelativeToolTip": "OBE\\Views\\Program\\GetProgram.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-21T16:13:31.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GetCourseGoals.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\CourseGoal\\GetCourseGoals.cshtml",
+              "RelativeDocumentMoniker": "OBE\\Views\\CourseGoal\\GetCourseGoals.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\CourseGoal\\GetCourseGoals.cshtml",
+              "RelativeToolTip": "OBE\\Views\\CourseGoal\\GetCourseGoals.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-21T16:12:48.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GetAllCollage.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\CollegeGoal\\GetAllCollage.cshtml",
+              "RelativeDocumentMoniker": "OBE\\Views\\CollegeGoal\\GetAllCollage.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\CollegeGoal\\GetAllCollage.cshtml",
+              "RelativeToolTip": "OBE\\Views\\CollegeGoal\\GetAllCollage.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-21T16:12:09.253Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetAllCourse.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\Course\\GetAllCourse.cshtml",
+              "RelativeDocumentMoniker": "OBE\\Views\\Course\\GetAllCourse.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\OBE\\OBE\\Views\\Course\\GetAllCourse.cshtml",
+              "RelativeToolTip": "OBE\\Views\\Course\\GetAllCourse.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-21T16:11:01.162Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

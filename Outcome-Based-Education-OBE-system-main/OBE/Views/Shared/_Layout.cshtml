@@ -1,0 +1,484 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var userName = HttpContextAccessor.HttpContext.Session.GetString("CurrentUserName");
+    var RoleUser = HttpContextAccessor.HttpContext.Session.GetString("Role");
+}
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University QMS - Sidebar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Logo Section */
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Navigation Menu */
+        .sidebar-nav {
+            flex: 1;
+            padding: 16px 0;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 20px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+
+            .nav-item:hover {
+                background-color: #f8fafc;
+                color: #1e293b;
+            }
+
+            .nav-item.active {
+                background-color: #eff6ff;
+                color: #2563eb;
+                border-left-color: #2563eb;
+            }
+
+            .nav-item .icon {
+                width: 22px;
+                height: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+            }
+
+            .nav-item .label {
+                flex: 1;
+            }
+
+        /* Sidebar Footer */
+        .sidebar-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 16px 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 8px;
+        }
+
+            .user-profile:hover {
+                background-color: #f8fafc;
+            }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            font-size: 18px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 2px;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+        }
+
+            .logout-btn:hover {
+                background-color: #fee2e2;
+                color: #dc2626;
+            }
+
+            .logout-btn .icon {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 32px;
+        }
+
+        .content-header {
+            margin-bottom: 32px;
+        }
+
+            .content-header h1 {
+                font-size: 2rem;
+                font-weight: 700;
+                color: #1e293b;
+                margin-bottom: 8px;
+            }
+
+            .content-header p {
+                font-size: 1rem;
+                color: #64748b;
+            }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hamburger {
+            width: 24px;
+            height: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+            .hamburger span {
+                width: 100%;
+                height: 3px;
+                background: #1e293b;
+                border-radius: 2px;
+                transition: all 0.3s;
+            }
+
+        /* Mobile Responsive */
+        @@media (max-width: 768px) {
+            .mobile-menu-toggle
+
+        {
+            display: block;
+        }
+
+        .sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+        .main-content {
+            margin-left: 0;
+            padding: 80px 20px 20px;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+        }
+
+        /* Scrollbar Styling */
+        .sidebar-nav::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+            .sidebar-nav::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Logo Section -->
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <div class="logo-icon">🎓</div>
+                <div class="logo-text">University QMS</div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-nav">
+       
+            <a class="nav-item" asp-action="GetProgram" asp-controller="Program">
+                <span class="icon">📚</span>
+                <span class="label">Programs</span>
+            </a>
+            <a  class="nav-item" asp-action="GetAllCollage" asp-controller="CollegeGoal" >
+                <span class="icon">📋</span>
+                <span class="label">College & Dept Goals</span>
+            </a>
+
+            <a asp-controller="Course" asp-action="GetAllCourse"  class="nav-item" >
+                <span class="icon">📚</span>
+                <span class="label">Courses</span>
+            </a>
+
+            <a class="nav-item"
+               asp-action="GetCourseGoals"
+               asp-controller="CourseGoal">
+                <span class="icon">✓</span>
+                <span class="label">CLOs</span>
+            </a>
+          
+            <a  asp-controller="ProgramGoal" asp-action="GetProgramGoals"  class="nav-item active" >
+                <span class="icon">🎯</span>
+                <span class="label">PLOs</span>
+            </a>
+            
+        </nav> 
+       
+           <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar">👤</div>
+                <div class="user-info">
+                    <div class="user-name">@userName</div>
+                    <div class="user-role">@RoleUser</div>
+                </div>
+            </div>
+
+
+
+            <a asp-action="Login" asp-controller="User">
+                <button class="logout-btn" onclick="logout()">
+                <span class="icon">🚪</span>
+                <span>Logout</span>
+				</button>
+			</a>
+		</div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="content-header">
+            <div class="content-header">
+                <h1>@(ViewData["Title"] ?? "Default Title")</h1>
+                <p>@(ViewData["Description"] ?? "University QMS System")</p>
+            </div>
+        </div>
+        @RenderBody()
+        <div class="content-card">
+            <p style="color: #64748b; line-height: 1.8;">
+                This is the main content area. You can replace this with your actual content.
+                The sidebar navigation is fully functional with hover effects and active states.
+            </p>
+        </div>
+    </main>
+
+    <script>
+        // Set active navigation item
+        function setActive(event, page) {
+            event.preventDefault();
+
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Add active class to clicked item
+            event.currentTarget.classList.add('active');
+
+            // Update content header based on page
+            const pageNames = {
+                'dashboard': 'Dashboard',
+                'university-goals': 'University Goals',
+                'college-dept-goals': 'College & Dept Goals',
+                'courses': 'Courses',
+                'clos': 'CLOs',
+                'plos': 'PLOs',
+                'clo-plo-mapping': 'CLO-PLO Mapping',
+                'reports': 'Reports',
+                'profile': 'Profile'
+            };
+
+            document.querySelector('.content-header h1').textContent = pageNames[page];
+
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        }
+
+        // Toggle sidebar for mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // In a real application, this would handle the logout process
+                alert('Logging out...');
+                window.location.href = 'User/Login';
+            }
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+
+            if (window.innerWidth <= 768 &&
+                sidebar.classList.contains('open') &&
+                !sidebar.contains(event.target) &&
+                !toggle.contains(event.target)) {
+                toggleSidebar();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
