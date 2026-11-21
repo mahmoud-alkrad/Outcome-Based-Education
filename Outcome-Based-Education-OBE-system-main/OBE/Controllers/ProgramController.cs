@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OBE.Models;
+using OBE.Security;
 
 namespace OBE.Controllers
 {
+    [Authorize(Policy = AppPolicies.AdminOrInstructor)]
     public class ProgramController : Controller
     {
         private readonly AppDbContext _db;
@@ -18,6 +21,7 @@ namespace OBE.Controllers
             return View(programs);
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult CreateProgram(string code,string NameEn,string NameAr, string isActive)
         {
             if(string.IsNullOrEmpty(code) || string.IsNullOrEmpty(NameEn) || string.IsNullOrEmpty(NameAr))
@@ -37,6 +41,7 @@ namespace OBE.Controllers
             return Ok(program);
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult EditProgram(int id, string code, string NameEn, string NameAr, bool isActive)
         {
             
@@ -60,6 +65,7 @@ namespace OBE.Controllers
             return Ok(existingProgram);
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult DeleteProgram(int id)
         {
             var program = _db.Programs.Find(id);

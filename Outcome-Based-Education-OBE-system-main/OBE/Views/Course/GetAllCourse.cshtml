@@ -222,25 +222,22 @@
                 }
                 // ====================================================
 
-                const row = `
-                    <tr>
-                        <td><span class="course-id">${course.id}</span></td>
-                        <td><span class="course-code">${course.code}</span></td>
-                        <td><span class="program-badge">${programName}</span></td>
-                        
-                        <td>${course.nameEn}</td>
-                        <td dir="rtl">${course.nameAr}</td>
-                        <td><span class="${markClass}">${course.mark}</span></td>
-                        <td class="date-text">${dateStr}</td>
-                        <td>
-                            <div class="actions">
-                                <button class="btn-icon btn-edit" onclick="openModal('edit', ${index})" title="Edit">✏️</button>
-                                <button class="btn-icon btn-delete" onclick="deleteCourse(${course.id})" title="Delete">🗑️</button>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
+                // OBE-06: build the row with DOM APIs (textContent) instead of innerHTML.
+                const tr = document.createElement('tr');
+                tr.append(
+                    safeCell(course.id, { spanClass: 'course-id' }),
+                    safeCell(course.code, { spanClass: 'course-code' }),
+                    safeCell(programName, { spanClass: 'program-badge' }),
+                    safeCell(course.nameEn),
+                    safeCell(course.nameAr, { dir: 'rtl' }),
+                    safeCell(course.mark, { spanClass: markClass }),
+                    safeCell(dateStr, { tdClass: 'date-text' }),
+                    actionsCell('actions', [
+                        actionButton('btn-icon btn-edit', '✏️', 'Edit', () => openModal('edit', index)),
+                        actionButton('btn-icon btn-delete', '🗑️', 'Delete', () => deleteCourse(course.id))
+                    ])
+                );
+                tbody.appendChild(tr);
             });
         }
 
@@ -308,6 +305,7 @@
             try {
                 const response = await fetch(url, {
                     method: 'POST',
+                    headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                     body: formData
                 });
 
@@ -336,6 +334,7 @@
 
                     const response = await fetch('/Course/DeleteCourse', {
                         method: 'POST',
+                        headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                         body: formData
                     });
 

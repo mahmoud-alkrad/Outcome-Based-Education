@@ -625,23 +625,20 @@
         filteredCLOs.forEach((clo, index) => {
             const progObj = allPrograms.find(p => p.id === clo.courseId);
                 const courseName = progObj ? progObj.name : 'Unknown Program';
-            const row = `
-                <tr>
-                    <td>${clo.id}</td>
-                    <td><span class="clo-code">${clo.code}</span></td>
-                    <td><span class="clo-code">${courseName}</span></td>
-                    <td>${clo.descriptionEn}</td>
-                    <td dir="rtl">${clo.descriptionAr}</td>
-                    
-                    <td>
-                        <div class="actions">
-                            <button class="btn-icon btn-edit" onclick="openModal('edit', ${index})">✏️</button>
-                            <button class="btn-icon btn-delete" onclick="deleteCLO(${clo.id})">🗑️</button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-            tbody.innerHTML += row;
+            // OBE-06: build the row with DOM APIs (textContent) instead of innerHTML.
+            const tr = document.createElement('tr');
+            tr.append(
+                safeCell(clo.id),
+                safeCell(clo.code, { spanClass: 'clo-code' }),
+                safeCell(courseName, { spanClass: 'clo-code' }),
+                safeCell(clo.descriptionEn),
+                safeCell(clo.descriptionAr, { dir: 'rtl' }),
+                actionsCell('actions', [
+                    actionButton('btn-icon btn-edit', '✏️', null, () => openModal('edit', index)),
+                    actionButton('btn-icon btn-delete', '🗑️', null, () => deleteCLO(clo.id))
+                ])
+            );
+            tbody.appendChild(tr);
         });
     }
 
@@ -707,6 +704,7 @@
         try {
             const response = await fetch(url, {
                 method: 'POST',
+                headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                 body: formData
             });
 
@@ -735,6 +733,7 @@
         try {
             const response = await fetch('/CourseGoal/DeleteCourseGoal', {
                 method: 'POST',
+                headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                 body: formData
             });
 

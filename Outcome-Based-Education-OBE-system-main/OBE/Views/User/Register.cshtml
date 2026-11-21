@@ -368,6 +368,7 @@
         </div>
 
         <form action="/User/Register" method="POST" class="form-wrapper" id="registrationForm">
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label for="email">
                     Email Address <span class="required">*</span>

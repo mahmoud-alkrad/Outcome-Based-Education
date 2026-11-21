@@ -545,6 +545,7 @@
             try {
                 const response = await fetch(url, {
                     method: 'POST',
+                    headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                     body: formData
                 });
 
@@ -574,6 +575,7 @@
 
                     const response = await fetch(`/Program/DeleteProgram`, {
                         method: 'POST',
+                        headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                         body: formData
                     });
 
@@ -605,21 +607,21 @@
                 const statusText = program.isActive ? 'True' : 'False';
                 const dateDisplay = formatDate(program.createdAt);
 
-                const row = `
-                    <tr>
-                        <td>${program.id}</td>
-                        <td>${program.code}</td>
-                        <td>${program.nameEn}</td>
-                        <td>${program.nameAr}</td>
-                        <td>${dateDisplay}</td>
-                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                        <td>
-                            <button class="btn btn-small btn-edit" onclick="openModal('edit', ${program.id})">Edit</button>
-                            <button class="btn btn-small btn-delete" onclick="deleteProgram(${program.id})">Delete</button>
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
+                // OBE-06: build the row with DOM APIs (textContent) instead of innerHTML.
+                const tr = document.createElement('tr');
+                tr.append(
+                    safeCell(program.id),
+                    safeCell(program.code),
+                    safeCell(program.nameEn),
+                    safeCell(program.nameAr),
+                    safeCell(dateDisplay),
+                    safeCell(statusText, { spanClass: 'status-badge ' + statusClass }),
+                    actionsCell(null, [
+                        actionButton('btn btn-small btn-edit', 'Edit', null, () => openModal('edit', program.id)),
+                        actionButton('btn btn-small btn-delete', 'Delete', null, () => deleteProgram(program.id))
+                    ])
+                );
+                tbody.appendChild(tr);
             });
         }
 

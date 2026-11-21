@@ -283,3 +283,4 @@ C:\Users\User\Downloads\Outcome-Based-Education-OBE-system-main\Outcome-Based-Ed
 C:\Users\User\Downloads\Outcome-Based-Education-OBE-system-main\Outcome-Based-Education-OBE-system-main\OBE\obj\Debug\net8.0\OBE.pdb
 C:\Users\User\Downloads\Outcome-Based-Education-OBE-system-main\Outcome-Based-Education-OBE-system-main\OBE\obj\Debug\net8.0\OBE.genruntimeconfig.cache
 C:\Users\User\Downloads\Outcome-Based-Education-OBE-system-main\Outcome-Based-Education-OBE-system-main\OBE\obj\Debug\net8.0\ref\OBE.dll
+C:\Users\User\Downloads\Outcome-Based-Education-OBE-system-main\Outcome-Based-Education-OBE-system-main\OBE\obj\Debug\net8.0\OBE.sourcelink.json

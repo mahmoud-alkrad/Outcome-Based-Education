@@ -1,8 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-    var userName = HttpContextAccessor.HttpContext.Session.GetString("CurrentUserName");
-    var RoleUser = HttpContextAccessor.HttpContext.Session.GetString("Role");
+    // OBE-01: user name and role come from the authenticated cookie claims.
+    var userName = User.Identity?.Name;
+    var RoleUser = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
 }
 }
 <!DOCTYPE html>
@@ -312,8 +313,56 @@
                 background: #94a3b8;
             }
     </style>
+    <script>
+        // OBE-11: antiforgery token for fetch() POST requests (sent as the RequestVerificationToken header).
+        function getAntiForgeryToken() {
+            const input = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]');
+            return input ? input.value : '';
+        }
+
+        // OBE-06: safe table-cell builders. Data is written with textContent, never parsed as HTML.
+        // opts: { spanClass, tdClass, dir, style }
+        function safeCell(value, opts = {}) {
+            const td = document.createElement('td');
+            if (opts.tdClass) td.className = opts.tdClass;
+            if (opts.dir) td.dir = opts.dir;
+            if (opts.style) td.style.cssText = opts.style;
+            const text = (value === null || value === undefined) ? '' : String(value);
+            if (opts.spanClass) {
+                const span = document.createElement('span');
+                span.className = opts.spanClass;
+                span.textContent = text;
+                td.appendChild(span);
+            } else {
+                td.textContent = text;
+            }
+            return td;
+        }
+
+        function actionButton(className, label, title, onClick) {
+            const btn = document.createElement('button');
+            btn.className = className;
+            btn.textContent = label;
+            if (title) btn.title = title;
+            btn.addEventListener('click', onClick);
+            return btn;
+        }
+
+        // Cell holding action buttons; wrapperClass (e.g. 'actions') adds an inner <div>.
+        function actionsCell(wrapperClass, buttons) {
+            const td = document.createElement('td');
+            const host = wrapperClass ? document.createElement('div') : td;
+            if (wrapperClass) { host.className = wrapperClass; td.appendChild(host); }
+            buttons.forEach((b, i) => {
+                if (i > 0) host.appendChild(document.createTextNode(' '));
+                host.appendChild(b);
+            });
+            return td;
+        }
+    </script>
 </head>
 <body>
+    <div id="antiForgeryForm" hidden>@Html.AntiForgeryToken()</div>
     <!-- Mobile Menu Toggle -->
     <div class="mobile-menu-toggle" onclick="toggleSidebar()">
         <div class="hamburger">
