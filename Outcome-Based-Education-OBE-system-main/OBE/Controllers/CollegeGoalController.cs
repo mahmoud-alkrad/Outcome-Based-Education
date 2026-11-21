@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OBE.Models;
+using OBE.Security;
 
 namespace OBE.Controllers
 {
+    [Authorize(Policy = AppPolicies.AdminOrInstructor)]
     public class CollegeGoalController : Controller
     {
         private readonly AppDbContext _db;
@@ -21,6 +24,7 @@ namespace OBE.Controllers
        
        
             [HttpPost]
+            [Authorize(Policy = AppPolicies.AdminOnly)]
             public IActionResult CreateCollage(CollegeGoal college, int programId)
             {
                 if (college == null)
@@ -63,6 +67,7 @@ namespace OBE.Controllers
             }
         
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult UpdateCollage(CollegeGoal college)
         {
             if (college == null || college.Id == 0)
@@ -85,6 +90,7 @@ namespace OBE.Controllers
             return Ok();
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult DeleteCollage(int id)
         {
             var collegeGoal = _db.CollegeGoals.Find(id);

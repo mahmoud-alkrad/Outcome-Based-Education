@@ -318,6 +318,7 @@
         </div>
 
         <form action="/User/Login" method="POST" class="form-wrapper" id="loginForm">
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email"

@@ -232,25 +232,21 @@
         filteredGoals.forEach((goal, index) => {
             const dateStr = goal.createdAt ? new Date(goal.createdAt).toLocaleDateString() : '-';
             
-            const row = `
-                <tr>
-                    <td>${goal.id}</td> 
-                    
-                    <td style="color:#2563eb; font-weight:bold;">${goal.programNames}</td>
-
-                    <td><span class="goal-id">${goal.code}</span></td>
-                    <td>${goal.titleEn}</td>
-                    <td dir="rtl">${goal.titleAr}</td>
-                    <td>${dateStr}</td>
-                    <td>
-                        <div class="actions">
-                            <button class="btn-icon btn-edit" onclick="openModal('edit', ${index})">✏️</button>
-                            <button class="btn-icon btn-delete" onclick="deleteGoal(${goal.id})">🗑️</button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-            tbody.innerHTML += row;
+            // OBE-06: build the row with DOM APIs (textContent) instead of innerHTML.
+            const tr = document.createElement('tr');
+            tr.append(
+                safeCell(goal.id),
+                safeCell(goal.programNames, { style: 'color:#2563eb; font-weight:bold;' }),
+                safeCell(goal.code, { spanClass: 'goal-id' }),
+                safeCell(goal.titleEn),
+                safeCell(goal.titleAr, { dir: 'rtl' }),
+                safeCell(dateStr),
+                actionsCell('actions', [
+                    actionButton('btn-icon btn-edit', '✏️', null, () => openModal('edit', index)),
+                    actionButton('btn-icon btn-delete', '🗑️', null, () => deleteGoal(goal.id))
+                ])
+            );
+            tbody.appendChild(tr);
         });
     }
 
@@ -322,6 +318,7 @@
             const url = modalMode === 'add' ? '/CollegeGoal/CreateCollage' : '/CollegeGoal/UpdateCollage';
             const response = await fetch(url, {
                 method: 'POST',
+                headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                 body: formData
             });
 
@@ -350,6 +347,7 @@
         try {
             const response = await fetch('/CollegeGoal/DeleteCollage', { // تأكد من المسار
                 method: 'POST',
+                headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                 body: formData
             });
 

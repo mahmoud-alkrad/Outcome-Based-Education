@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using OBE.Models;
+using OBE.Security;
 
 namespace OBE.Controllers
 {
+    [Authorize(Policy = AppPolicies.AdminOrInstructor)]
     public class CourseGoalController : Controller
     {
         private readonly AppDbContext _db;

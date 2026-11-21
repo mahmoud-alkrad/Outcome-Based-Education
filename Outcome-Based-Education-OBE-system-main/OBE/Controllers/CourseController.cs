@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OBE.Models;
+using OBE.Security;
 
 namespace OBE.Controllers
 {
+    [Authorize(Policy = AppPolicies.AdminOrInstructor)]
     public class CourseController : Controller
     {
         private readonly AppDbContext _db;
@@ -18,6 +21,7 @@ namespace OBE.Controllers
             return View(courses);
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult CreateCourse(string Code,string NameEn,string NameAr,int programId,decimal Mark)
         { 
         if(string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(NameAr) || string.IsNullOrEmpty(NameEn))
@@ -50,6 +54,7 @@ namespace OBE.Controllers
         
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult EditCourse(int id, string Code, string NameEn, string NameAr,decimal Mark ,int programId)
         {
             var course = _db.Courses.Find(id);
@@ -68,6 +73,7 @@ namespace OBE.Controllers
             return Ok(course);
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult DeleteCourse(int Id)
         {
             var course = _db.Courses.Find(Id);

@@ -641,6 +641,7 @@
             try {
                 const response = await fetch(url, {
                     method: 'POST',
+                    headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                     body: formData
                 });
 
@@ -671,6 +672,7 @@
                     // تأكد من وجود دالة DeletePlo في الكنترولر
                     const response = await fetch('/ProgramGoal/DeleteProgramGoal', {
                         method: 'POST',
+                        headers: { 'RequestVerificationToken': getAntiForgeryToken() },
                         body: formData
                     });
 

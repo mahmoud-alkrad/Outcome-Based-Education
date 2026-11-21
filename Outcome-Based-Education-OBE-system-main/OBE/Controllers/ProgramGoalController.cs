@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OBE.Models;
+using OBE.Security;
 
 namespace OBE.Controllers
 {
+    [Authorize(Policy = AppPolicies.AdminOrInstructor)]
     public class ProgramGoalController : Controller
     {
         private readonly AppDbContext _db;
@@ -21,6 +24,7 @@ namespace OBE.Controllers
             return View(programGoals);
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult CreateProgramGoal(string code,string TitleEn,string TitleAr, string DescriptionAr, string DescriptionEn,int programId)
         {
             if(string.IsNullOrEmpty(code) || string.IsNullOrEmpty(TitleAr) || string.IsNullOrEmpty(TitleEn)|| string.IsNullOrEmpty(DescriptionEn) || string.IsNullOrEmpty(DescriptionAr))
@@ -54,6 +58,7 @@ namespace OBE.Controllers
 
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult EditProgramGoal(int id, string code,string TitleEn,string TitleAr, string DescrptionAr, string DescrptionEn)
         {
             
@@ -74,6 +79,7 @@ namespace OBE.Controllers
             return Ok(existingProgramGoal);
         }
         [HttpPost]
+        [Authorize(Policy = AppPolicies.AdminOnly)]
         public IActionResult DeleteProgramGoal(int id)
         {
             var existingProgramGoal = _db.ProgramGoals.Find(id);
